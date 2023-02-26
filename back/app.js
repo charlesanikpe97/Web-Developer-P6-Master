@@ -18,4 +18,4 @@ app.use((req, res, next) => {
 app.use('/api/auth', userRoute);
 
 
-  module.exports = app;
+module.exports = app;
