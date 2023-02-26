@@ -4,7 +4,7 @@
   "description": "backend openclassroom project 6",
   "main": "index.js",
   "scripts": {
-    "devStart":"nodemon server.js"
+    "devStart": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.9.1",
+    "mongoose-unique-validator": "^3.1.0",
     "nodemon": "^2.0.20"
   }
 }
