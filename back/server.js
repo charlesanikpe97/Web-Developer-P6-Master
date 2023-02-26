@@ -1,19 +1,52 @@
-require('dotenv').config();
+const http = require('http');
+const app = require('../app');
 
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
+const normalizePort = val => {
+    const port = parseInt(val, 10);
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true});
-const db = mongoose.connection
-db.on('error', (error)=> console.error(error))
-db.once('open', ()=> console.log('Connected to HotTakesDB!'))
+    if (isNaN(port)) {
+        return val;
+    }
 
-app.use(express.json())
+    if (port >= 0) {
+        return port;
+    }
 
-const userSignUp = require('./routes/signup')
-app.use('/api/auth/signup', userSignUp)
+    return false;
+};
 
-app.listen(3000, () =>{
-    console.log('Server is listening on port 3000!')
-})
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+const errorHandler = error => {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    const address = server.address();
+    const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
+
+    switch (error.code) {
+        case 'EACCES':
+        console.error(bind + ' requires elevated priviledges.')
+        process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use.');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+};
+
+const server = http.createServer(app);
+
+server.on('error', errorHandler);
+server.on('listening', () => {
+  const address = server.address();
+  const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
+  console.log('Listening on ' + bind);
+});
+
+server.listen(port);
