@@ -1,30 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('jsonwebtoken');
+const auth = require('../middleware/auth');
+const saucesCtrl = require('../controllers/sauces.controller');
 
 
-router.get('/', auth, (req, res, next)=>{
-
-});
-
-router.get('/:id', auth, (req, res, next)=>{
-
-});
-
-router.post('/', auth, (req, res, next)=>{
-
-});
-
-router.put('/:id', auth, (req, res, next)=>{
-
-});
-
-router.delete('/:id', auth, (req, res, next)=>{
-
-});
-
-router.post('/:id/like', auth, (req, res, next)=>{
-
-});
+router.get('/', auth, saucesCtrl.getAllSauces);
+router.get('/:id', auth, saucesCtrl.getSpecificSauce);
+router.post('/', auth, saucesCtrl.addSauce);
+router.put('/:id', auth, saucesCtrl.modifySauce);
+router.delete('/:id', auth, saucesCtrl.deleteSauce);
+router.post('/:id/like', auth, saucesCtrl.likedSauce);
 
 module.exports = router;
