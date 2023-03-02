@@ -1,28 +1,29 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('jsonwebtoken');
 
 
-router.get('/', (req, res, next)=>{
-
-});
-
-router.get('/:id', (req, res, next)=>{
+router.get('/', auth, (req, res, next)=>{
 
 });
 
-router.post('/', (req, res, next)=>{
+router.get('/:id', auth, (req, res, next)=>{
 
 });
 
-router.put('/:id', (req, res, next)=>{
+router.post('/', auth, (req, res, next)=>{
 
 });
 
-router.delete('/:id', (req, res, next)=>{
+router.put('/:id', auth, (req, res, next)=>{
 
 });
 
-router.post('/:id/like', (req, res, next)=>{
+router.delete('/:id', auth, (req, res, next)=>{
+
+});
+
+router.post('/:id/like', auth, (req, res, next)=>{
 
 });
 
