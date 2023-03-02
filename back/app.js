@@ -2,7 +2,8 @@
 
 const express = require('express');
 const app = express();
-const userRouter = require('./routes/user.route');
+const userRouter = require('./routes/user.routes');
+const saucesRouter = require('./routes/sauces.routes');
 
 
 
@@ -16,6 +17,7 @@ app.use('/',(req, res, next) => {
   });
 
 app.use('/api/auth', userRouter);
+app.use('/api/sauces', saucesRouter);
 
 
 module.exports = app;
