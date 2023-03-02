@@ -25,3 +25,5 @@ router.delete('/:id', (req, res, next)=>{
 router.post('/:id/like', (req, res, next)=>{
 
 });
+
+module.exports = router;
