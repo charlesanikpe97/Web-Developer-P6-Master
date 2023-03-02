@@ -14,7 +14,7 @@ exports.signup = (req,res,next)=>{
             })
         }).catch((error)=>{
             res.status(500).json({
-                error: error
+                error: error,
             })
         })
     })
@@ -37,6 +37,10 @@ exports.login = (req,res,next)=>{
                 { userId: user._id},
                 'RANDOM_SECRET_TOKEN',
                 { expiresIn: '24h'});
+            res.status(200).json({
+                userId: user._id,
+                token : token
+            })
         }).catch((error)=>{
             res.status(500).json({
                 error: error
