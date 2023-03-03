@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const userRouter = require('./routes/user.routes');
 const saucesRouter = require('./routes/sauces.routes');
+const path = require('path');
 
 
 
@@ -19,5 +20,7 @@ app.use('/',(req, res, next) => {
 app.use('/api/auth', userRouter);
 app.use('/api/sauces', saucesRouter);
 
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;

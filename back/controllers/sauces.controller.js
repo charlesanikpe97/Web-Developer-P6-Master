@@ -1,9 +1,9 @@
-const Sauces = require('../models/sauces.model');
+const Sauce = require('../models/sauces.model');
 const fs = require('fs');
 
 
 exports.getAllSauces = (req,res,next)=> {
-    Sauces.find().then((allSauces)=>{
+    Sauce.find().then((allSauces)=>{
         res.status(200).json((allSauces))
     }).catch((error)=>{
         res.status(400).json({
@@ -14,9 +14,10 @@ exports.getAllSauces = (req,res,next)=> {
 
 
 exports.getSpecificSauce = (req,res,next)=> {
-    Sauces.findOne({
+    console.log(req.params.id)
+    Sauce.findOne({
         _id: req.params.id
-    }).then((specificSauce)=>{
+    }).then(specificSauce=>{
         res.status(200).json(specificSauce);
     }).catch((error)=>{
         res.status(404).json({
