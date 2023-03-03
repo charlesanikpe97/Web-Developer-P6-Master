@@ -66,11 +66,12 @@ exports.modifySauce = (req,res,next)=>{
                 ...JSON.parse(req.body.sauce),
                 imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
             } : { ...req.body };
-        Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-            .then(() => res.status(200).json({ message: 'Sauce modified!' }))
+            console.log(sauceObject);
+        Sauce.updateOne({ _id: req.params.id }, sauceObject)
+            .then(() => res.status(201).json({ message: 'Sauce modified!' }))
             .catch(error => res.status(400).json({ error }));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch((error) => {console.log(error) ;  res.status(500).json({ error })});
 };
 
 
@@ -93,8 +94,8 @@ exports.deleteSauce = (req,res,next)=>{
           const filename = sauce.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
               Sauce.deleteOne({ _id: req.params.id })
-                  .then(() => res.status(200).json({ sauces }))
-                  .catch(error => res.status(400).json({ error }));
+                .then(() => res.status(200).json({ message: "Sauce has been deleted!" }))
+                .catch((error) => res.status(400).json({ error }));   
           });
       })
       .catch(error => res.status(500).json({ error }));
